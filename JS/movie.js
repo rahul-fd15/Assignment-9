@@ -1,22 +1,22 @@
-const button=document.querySelector("#button") //search button
-const imageSection=document.querySelector("#imageSection") //movies appearing section
+const button = document.querySelector("#button") //search button
+const imageSection = document.querySelector("#imageSection") //movies appearing section
 
 //adding event listner when button click
-button.addEventListener("click",(e)=>{
+button.addEventListener("click", (e) => {
     //preventing default refresh
     e.preventDefault()
     //getting the input value from user inputing
-    let input=document.querySelector("#userInput").value
+    let input = document.querySelector("#userInput").value
     //calling moviesearch function and passing user input
     movieSearch(input)
-    
+
 })
 
 //arrow function search for movies using OMDb API with parameter input from user
 const movieSearch = (input) => {
     //fetching the api link and inserting user input which movie to search
-    fetch(`http://www.omdbapi.com/?s=${input}&apikey=7be1539e`)
-         //getting response into json format
+    fetch(`https://www.omdbapi.com/?s=${input}&apikey=7be1539e`)
+        //getting response into json format
         .then(response => response.json())
         .then(json => {
             imageSection.innerHTML = ""; // clear previous search results
@@ -44,13 +44,13 @@ const movieSearch = (input) => {
                     // Creating an h4 element to display the movie's title
                     const title = document.createElement("h4");
                     title.textContent = movie.Title;  // Setting the title of the movie
-                     
+
 
                     // Creating a paragraph element to display the movie's release year
                     const year = document.createElement("p");
                     year.textContent = "Year: " + movie.Year; // Setting the year text
-                    
-                     // Appending the image, title and year to the movie card
+
+                    // Appending the image, title and year to the movie card
                     movieCard.appendChild(img);
                     movieCard.appendChild(title);
                     movieCard.appendChild(year);
@@ -61,8 +61,8 @@ const movieSearch = (input) => {
                 // If no movies are found, alert message
                 alert("no movies found")
                 //clearing input box
-                document.querySelector("#userInput").value=''
-                
+                document.querySelector("#userInput").value = ''
+
             }
         })
         .catch(error => {
@@ -72,4 +72,3 @@ const movieSearch = (input) => {
             imageSection.innerHTML = "<p>Something went wrong. Please try again.</p>";
         });
 };
-   
